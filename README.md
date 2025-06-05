@@ -98,7 +98,7 @@ Then send a POST request to http://127.0.0.1:3000/test with your JSON body.
 You can also use "make" tool (install "make" tool first) for automating the building, testing, cleaning, deploying tasks.
 ```
 > makefile
-APP_NAME = LambdaFunctionUsingGo
+APP_NAME = MyFunction
 
 .PHONY: build clean local-invoke
 
