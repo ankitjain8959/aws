@@ -6,7 +6,7 @@ Cloud Documentation
 
 # AWS Lambda
 AWS Lambda is a `serverless compute service` offered by Amazon Web Services (AWS). It lets you run code without provisioning or managing servers. <br>
-You just write your function code, upload it, and AWS handles the rest.
+You just write your function code, `upload it as a zip file` or `container image`, and AWS handles the rest. Lambda automatically allocates compute execution power and runs your code based on the incoming request or event, for any scale of traffic.
 
 ## Lambda functions and function handlers
 > Lambda function
@@ -46,4 +46,73 @@ This gives information about the Lambda execution environment. Common context fi
 - `Trigger:` A Lambda function is invoked by an event (like an HTTP request via API Gateway, a file upload in S3, or a scheduled cron job via EventBridge).
 - `Execution:` AWS provisions a container, loads the runtime (e.g., Python, Node.js), and runs your function code.
 - `Scale:` AWS automatically scales the number of function instances based on demand.
-- `Shutdown:` The container is frozen (or terminated) after the execution finishes (for cost savings). 
+- `Shutdown:` The container is frozen (or terminated) after the execution finishes (for cost savings).
+
+## How to test your Lambda function locally (using AWS SAM CLI & Docker)
+1. Create a SAM Template (It defines your Lambda function and its configuration in a way that AWS SAM CLI understands)
+Create a file named `template.yaml` in your project directory
+```
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+Resources:
+  MyFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: main
+      Runtime: go1.x
+      CodeUri: .
+      Events:
+        ApiEvent:
+          Type: Api
+          Properties:
+            Path: /test
+            Method: post
+```
+2. Build the Lambda
+```
+sam build
+```
+
+3. Create a Test Event (event.json)
+```
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "age": 30
+}
+```
+
+4. Invoke the Lambda Locally
+```
+sam local invoke MyFunction -e event.json
+```
+
+5. [Optional] Start a Local API and test with HTTP requests
+```
+sam local start-api
+```
+Then send a POST request to http://127.0.0.1:3000/test with your JSON body.
+
+
+You can also use "make" tool (install "make" tool first) for automating the building, testing, cleaning, deploying tasks.
+```
+> makefile
+APP_NAME = LambdaFunctionUsingGo
+
+.PHONY: build clean local-invoke
+
+build:
+	@echo "Building Lambda..."
+	sam build
+
+clean:
+	PowerShell -Command "Remove-Item -Recurse -Force .aws-sam\\build"
+
+local-invoke:
+	sam local invoke $(APP_NAME) --event event.json
+```
+
+Now, you can just run below commands: <br>
+- make clean
+- make build
+- make local-invoke
