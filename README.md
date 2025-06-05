@@ -16,10 +16,11 @@ You just write your function code, `upload it as a zip file` or `container image
 > Function handler
 - The function handler is the entry point of your lambda function - it’s the method AWS calls when your Lambda is triggered.
 -  It takes the event and context -> does the work -> and returns a response. Your function runs until the handler returns a response, exits, or times out.
-  | Parameter   | Description                                                                                                                        |
+
+| Parameter   | Description                                                                                                                        |
 | ----------- | ---------------------------------------------------------------------------------------------------------------------------------- |
 | **event**   | The **input data** passed to your Lambda. This can be from API Gateway, S3, SNS, DynamoDB, Step Functions, etc. It's usually JSON. |
-| **context** | Metadata (eg. request Id, timeout, memory etc) about the invocation, function, and environment. Provided by AWS to your function at runtime.                             |
+| **context** | Metadata (eg. request Id, timeout, memory etc) about the invocation, function, and environment. Provided by AWS to your function at runtime. |
 
 `event`
 This is the trigger input, and varies based on what invoked the Lambda:
