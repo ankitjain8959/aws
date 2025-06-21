@@ -1,8 +1,5 @@
-
-
 # Aws
 Cloud Documentation
-
 
 # AWS Lambda
 AWS Lambda is a `serverless compute service` offered by Amazon Web Services (AWS). It lets you run code without provisioning or managing servers. <br>
@@ -156,13 +153,8 @@ Amazon EKS (Elastic Kubernetes Service) is a managed Kubernetes service provided
 > EKS Control Plane – Fully managed by AWS.
 > Node Group (worker nodes) – This is a group of EC2 instances that run the Kubernetes worker nodes.
 
-EKS Cluster
-├── Control Plane (AWS managed)
-│
-└── Node Group (Your worker nodes)
-    ├── EC2 instance 1 (runs pods)
-    ├── EC2 instance 2 (runs more pods)
-    └── EC2 instance 3 (etc.)
+<img width="195" alt="image" src="https://github.com/user-attachments/assets/1d385444-fb31-494a-b0fe-80aa36689abf" />
+
 
 Example flow: <br>
 Let’s say you deploy a microservice to your EKS cluster:
