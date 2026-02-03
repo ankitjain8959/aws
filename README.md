@@ -1,8 +1,8 @@
-# Aws
-AWS Cloud Documentation
-
 ## Table of Contents
-- AWS Services
+- [Virtualization](docs/Basics.md#virtualization)
+- [Cloud Computing](docs/Basics.md#cloud-computing)
+- [VPC - Virtual Private Cloud](docs/Basics.md#vpc-virtual-private-cloud)
+- AWS Services 
   - [IAM (Identity and Access Management)](docs/IAM.md)
   - [Lambda](docs/Lambda.md)
   - [EC2 (Elastic Compute Cloud)](docs/EC2.md)
